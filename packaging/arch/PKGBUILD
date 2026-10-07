@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=ooshred-bin
+_pkgname=ooshred
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Overwrites file locations with pseudorandom passes before unlinking from inodes."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/ooshred"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('ooshred')
+conflicts=('ooshred')
+source_x86_64=("${url}/releases/download/v${pkgver}/ooshred-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/ooshred-linux-x86_64" "${pkgdir}/usr/bin/ooshred"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/ooshred-uninstall"
+}
